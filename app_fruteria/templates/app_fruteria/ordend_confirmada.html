@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Pedido Confirmado!</title>
+    <style>
+        .btn-pagar {
+            background-color: #ff4d4d; /* (Asumo un color) */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'app_fruteria/imagenes/icon.jpg' %}" alt="Logo">
+        Olivos Verdes
+    </header>
+
+    <button id="menu-btn" class="hamburger-icon">☰</button>
+    <nav id="menu" class="menu-nav">
+        <ul>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li><a href="{% url 'menu_virtual' %}">Menú Virtual</a></li>
+            <li><a href="{% url 'perfil' %}">Mi Perfil</a></li>
+            <li><a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="text-align: center; padding: 40px; color: #fff; max-width: 600px; margin: 40px auto; background-color: #2b2b2b; border-radius: 10px;">
+            
+            <h2>✅ ¡Gracias por tu compra, {{ request.user.first_name }}!</h2>
+            
+            <p>Tu pedido ha sido confirmado y se ha guardado en la base de datos.</p>
+            <br>
+            
+            <p style="font-size: 1.2em;"><strong>Número de Pedido:</strong> {{ pedido.id }}</p>
+            <p><strong>ID de Transacción (simulada):</strong> {{ pedido.id_transaccion_pago }}</p>
+            <br>
+            <br>
+            
+            <a href="{% url 'menu_virtual' %}" class="btn-pagar" style="text-decoration: none;">Seguir comprando</a>
+        </div>
+        </main>
+
+    <footer>
+        Copyright | Frutería Olivos Verdes
+    </footer>
+
+    <script>
+        // Tu script del menú hamburguesa
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        menuBtn.addEventListener('click', () => menu.classList.toggle('active'));
+    </script>
+</body>
+</html>
